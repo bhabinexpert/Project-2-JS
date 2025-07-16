@@ -1,0 +1,180 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.fullpage{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas:
+    "navbar navbar navbar navbar" 
+    "videoContainer videoContainer videoContainer suggestions"
+    "comments comments comments suggestions"
+    ;
+    gap: 10px;
+}
+
+.navbar{
+    grid-area: navbar;
+    background-color: rgba(43, 46, 46, 0.068);
+    height: 50px;
+}
+
+.videoContainer {
+    grid-area: videoContainer;
+    background-color: black;
+    height: 70vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.suggestions{
+    grid-area: suggestions;
+    background-color: lightsalmon;
+}
+
+.comments{
+    grid-area: comments;
+    background-color: lightskyblue;
+    height: 500px;
+}
+
+#video-thumbnail{
+    position: absolute;
+    max-width: 100%;
+    height: 100%;
+}
+
+.controls{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(124, 120, 120, 0.247);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    transition: opacity 0.3 ease-in-out;
+}
+
+.controls .control-buttons{
+    display: flex;
+    gap: 30px;
+}
+
+.controls .control-buttons button {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    
+    cursor: pointer;
+    color: white;
+    margin: 10px;
+  
+}
+
+.controls .control-buttons #play-pause{
+    font-size: 20px;
+}
+
+.controls .video-timer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    font-size: 13px;
+}
+
+.controls #separator{
+    margin: 0 5px;
+    font-size: 16px;
+    font-family:"Open sans"
+}
+
+.playback-line{
+    position: relative;
+    width: 100%;
+    height: 8px;
+    background-color: rgba(78, 76, 76, 0.795);
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 20px
+}
+
+.progress-bar{
+    height: 100%;
+    width: 0;
+    transition: width 0.1s linear;
+    border-radius: 5px;
+    background-color:red;
+    position: relative;
+}
+
+.progress-bar::after{
+    content: "";
+    position: absolute;
+    right: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    background-color: red;
+    border-radius: 50%;
+    transition: right 0.1s linear;
+}
+
+.controls .fa-volume-up, .controls .fa-solid{
+    padding: 5px ;
+    color: white;
+}
+
+.controls input{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+
+}
+
+.rigth{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.volume-container{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+#volume{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(to right, red 0%, red var(--value), lightgray var(--value) lightgray
+    (100%));
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+}
+
+#volume::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    appearance: none;
+    width: 12px;
+    height: 12px;
+    background: red;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+
+}
+#mute{
+    cursor: pointer;
+}
