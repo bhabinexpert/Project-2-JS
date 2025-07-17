@@ -41,9 +41,8 @@ function togglePlayPause(){
 }
 
 document.addEventListener('keydown', function(event){
-    if(event.key === 32 ||event.key === " "){
+    if(event.key === " "){
         event.preventDefault()
-
         togglePlayPause()  
     }
 })
@@ -83,20 +82,19 @@ muteBtn.addEventListener('click',function(){
 })
 
 document.addEventListener('keydown', function(e){
-    if(e.key === "M" || e.key === "m")
-        e.preventDefault()
-
-     if(video.muted){
-        video.muted = false
-        muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>'
-        volume.value = video.volume
-    }else{
-        video.muted = true
-        muteBtn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>'
-        volume.value = 0
-
+    if(e.key === "M" || e.key === "m") {
+        e.preventDefault();
+        if(video.muted){
+            video.muted = false;
+            muteBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+            volume.value = video.volume;
+        } else {
+            video.muted = true;
+            muteBtn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+            volume.value = 0;
+        }
     }
-})
+});
 
 volume.addEventListener('input', function(){
     video.volume = volume.value
@@ -127,7 +125,7 @@ video.addEventListener("timeupdate", ()=>{
 })
 
 function showThumbnail(){
-    videoThumbnail.style.dispaly = "block"
+    videoThumbnail.style.display = "block"
 }
 
 video.addEventListener("ended", ()=>{
@@ -150,7 +148,7 @@ const timeFormatter = (timeInput)=>{
 setInterval(()=>{
     currentTimeRef.innerHTML = timeFormatter(video.currentTime)
     maxDuration.innerHTML = timeFormatter(video.duration)
-},1)
+}, 250)
 
 playbackLine.addEventListener("click",(e)=>{
     let timelineWidth = playbackLine.clientWidth
@@ -158,13 +156,15 @@ playbackLine.addEventListener("click",(e)=>{
 })
 
 function updateVolumeBackground(){
-    const volume =( volume.value - volume.min) / (volume.max-volume.min) * 100
-    volume.style.setProperty('--value',`${value}%`)
+    const percent = (volume.value - volume.min) / (volume.max - volume.min) * 100;
+    volume.style.setProperty('--value', `${percent}%`);
 }
+
 volume.addEventListener('input', updateVolumeBackground)
 updateVolumeBackground()
 
 fullScreenBtn.addEventListener('click',()=>{
+  
     if(!document.fullscreenElement){
         videoContainer.requestFullscreen().catch((err)=>{
             alert(`ERROR attempting to enable the full-screen mode: ${err.message} (${err.name})`)
